@@ -1,0 +1,11 @@
+inherit_gem:
+  dm_linters: './config/.rubocop.yml'
+
+AllCops:
+  TargetRubyVersion: 2.4
+  TargetRailsVersion: 5.1
+  Exclude:
+    - './db/schema.rb'
+
+Metrics/LineLength:
+  Max: 140
