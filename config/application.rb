@@ -38,5 +38,6 @@ module TourConcierge
                           routing_specs: false,
                           helper_specs: false,
                           integration_tool: false
+    end
   end
 end
