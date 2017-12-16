@@ -5,7 +5,7 @@
 ### モデル
 
 ```ruby
-rails g model Venue name:string address:text capacity:string url:string import:string
+rails g model Venue name:string address:text latlang:string capacity:string url:string import:string
 ```
 
 ### 一覧
@@ -20,6 +20,7 @@ http://www.livefans.jp/venues/{vanue_id} → import
 
 - `div.titleblock > h1#title` → name
 - `section#info.category > table > tbody > tr > 0` → address
+- `iframe#map > src="/venues/map?latitude=35.667319&amp;longitude=139.718130"` → latlang
 - `section#info.category > table > tbody > tr > 2` → capacity
 - `section#info.category > table > tbody > tr > 5` → url
 
