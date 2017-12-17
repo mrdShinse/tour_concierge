@@ -47,7 +47,7 @@ module Livefans
         html_venues = oga.xpath('html/body/div/div/div')
         html_venues.map do |venue|
           a_tag = venue.xpath('h3/a')
-          next if a_tag.attribute('href').nil?
+          next if a_tag.attribute('href').nil? || a_tag.attribute('href')[0].try(:value)
           { name:   a_tag.text,
             import: "#{livefans_root}#{a_tag.attribute('href')[0].value}" }
         end
