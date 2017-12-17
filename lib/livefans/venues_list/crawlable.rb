@@ -28,9 +28,9 @@ module Livefans
         if @last_fetched.present? && (Time.current.to_i - @last_fetched) < 2
           sleep 1 while (Time.current.to_i - @last_fetched) < 2
         end
+        @last_fetched = Time.current.to_i
         result = HTTPClient.get(url)
         result.body
-        @last_fetched = Time.current.to_i
       end
 
       def parse_crawling_count(html)
