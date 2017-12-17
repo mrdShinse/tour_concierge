@@ -5,7 +5,7 @@ module Livefans
     module Crawlable # :nodoc:
       def crawl_venues_list
         venues_list = Prefecture.ids.map { |id| crawl_venues_list_by_pref id }.flatten
-        venues_list.each { |venue| Venue.find_or_initialize_by(import: venue[:import]) { |v| v.update(venue) } }
+        venues_list.compact.each { |venue| Venue.find_or_initialize_by(import: venue[:import]) { |v| v.update(venue) } }
       end
 
       def crawl_venues_list_by_pref(code)
@@ -47,7 +47,7 @@ module Livefans
         html_venues = oga.xpath('html/body/div/div/div')
         html_venues.map do |venue|
           a_tag = venue.xpath('h3/a')
-          next if a_tag.attribute('href').nil? || a_tag.attribute('href')[0].try(:value).nil?
+          return nil if a_tag.attribute('href').nil? || a_tag.attribute('href')[0].try(:value).nil?
           { name:   a_tag.text,
             import: "#{livefans_root}#{a_tag.attribute('href')[0].value}" }
         end
