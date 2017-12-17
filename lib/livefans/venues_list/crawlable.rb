@@ -4,7 +4,8 @@ module Livefans
   module VenuesList
     module Crawlable # :nodoc:
       def crawl_venues_list
-        Prefecture.ids.map { |id| crawl_venues_list_by_pref id }.flatten
+        venues_list = Prefecture.ids.map { |id| crawl_venues_list_by_pref id }.flatten
+        venues_list.each { |venue| Venue.find_or_initialized_by(import: venue[:import]) { |v| v.update(venue) } }
       end
 
       def crawl_venues_list_by_pref(code)
@@ -24,8 +25,12 @@ module Livefans
       end
 
       def fetch_venues_list_page(url)
+        if @last_fetched.nil? || Time.current.to_i - @last_fetched < 2
+          sleep 1 while Time.current.to_i - @last_fetched < 2
+        end
         result = HTTPClient.get(url)
         result.body
+        @last_fetched = Time.current.to_i
       end
 
       def parse_crawling_count(html)
