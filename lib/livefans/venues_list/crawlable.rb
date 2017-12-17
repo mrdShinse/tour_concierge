@@ -23,8 +23,9 @@ module Livefans
         format(venues_list_path_format, pref_code, page)
       end
 
-      def fetch_venues_list_page(_url)
-        ''
+      def fetch_venues_list_page(url)
+        result = HTTPClient.get(url)
+        result.body
       end
 
       def parse_crawling_count(html)
