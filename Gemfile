@@ -29,6 +29,7 @@ gem 'slim-rails', '~> 3.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # HTML parser
+gem 'httpclient'
 gem 'oga'
 
 # Use Redis adapter to run Action Cable in production
