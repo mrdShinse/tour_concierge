@@ -28,15 +28,27 @@ module Livefans
       end
 
       def parse_crawling_count(html)
-        7
+        oga = Oga.parse_html(html)
+        venues_count = oga.xpath('html/body/div/div/h3/span').last.text.delete('件').to_i
+        venues_count / 16 + 1
       end
 
-      def parse_venues_list(_html = '')
-        [{}, {}]
+      def parse_venues_list(html)
+        oga = Oga.parse_html(html)
+        html_venues = oga.xpath('html/body/div/div/div')
+        html_venues.map do |venue|
+          html_venue = venue.xpath('h3/a')
+          { name:   html_venue.text,
+            import: "#{livefans_root}#{html_venue.attribute('href')[0].value}" }
+        end
       end
 
       def venues_list_path_format
-        'http://www.livefans.jp/venue/search/area/JPN-%02d/page:%01d'
+        livefans_root + '/venue/search/area/JPN-%02d/page:%01d'
+      end
+
+      def livefans_root
+        'http://www.livefans.jp'
       end
     end
   end
