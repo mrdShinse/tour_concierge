@@ -35,7 +35,10 @@ module Livefans
 
       def parse_crawling_count(html)
         oga = Oga.parse_html(html)
-        venues_count = oga.xpath('html/body/div/div/h3/span').last.text.delete('件').to_i
+        venues_count_text = oga.xpath('html/body/div/div/h3/span').last.try(:text)
+        return 1 unless venues_count_text
+        venues_count = venues_count_text.delete('件').try(:to_i)
+        return 1 unless venues_count
         venues_count / 16 + 1
       end
 
@@ -43,9 +46,10 @@ module Livefans
         oga = Oga.parse_html(html)
         html_venues = oga.xpath('html/body/div/div/div')
         html_venues.map do |venue|
-          html_venue = venue.xpath('h3/a')
-          { name:   html_venue.text,
-            import: "#{livefans_root}#{html_venue.attribute('href')[0].value}" }
+          a_tag = venue.xpath('h3/a')
+          next if a_tag.attribute('href').nil?
+          { name:   a_tag.text,
+            import: "#{livefans_root}#{a_tag.attribute('href')[0].value}" }
         end
       end
 
