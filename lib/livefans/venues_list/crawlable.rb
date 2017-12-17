@@ -25,8 +25,8 @@ module Livefans
       end
 
       def fetch_venues_list_page(url)
-        if @last_fetched.nil? || Time.current.to_i - @last_fetched < 2
-          sleep 1 while Time.current.to_i - @last_fetched < 2
+        if @last_fetched.present? && (Time.current.to_i - @last_fetched) < 2
+          sleep 1 while (Time.current.to_i - @last_fetched) < 2
         end
         result = HTTPClient.get(url)
         result.body
