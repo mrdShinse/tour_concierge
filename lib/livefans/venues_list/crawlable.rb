@@ -5,7 +5,10 @@ module Livefans
     module Crawlable # :nodoc:
       def crawl_venues_list
         venues_list = Prefecture.ids.map { |id| crawl_venues_list_by_pref id }.flatten
-        venues_list.compact.each { |venue| Venue.find_or_initialize_by(import: venue[:import]) { |v| v.update(venue) } }
+        venues_list.compact.each do |venue|
+          next if venue.empty?
+          Venue.find_or_initialize_by(import: venue[:import]) { |v| v.update(venue) }
+        end
       end
 
       def crawl_venues_list_by_pref(code)
