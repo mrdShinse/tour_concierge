@@ -36,4 +36,9 @@ RSpec.describe Livefans::VenuesList::Crawlable do
       it { is_expected.to eq([]) }
     end
   end
+
+  describe '#venues_list_path' do
+    subject { target.venues_list_path(1, 1) }
+    it { is_expected.to eq('http://www.livefans.jp/venue/search/area/JPN-01/page:1') }
+  end
 end
