@@ -12,7 +12,7 @@ module Livefans
       end
 
       def crawl_venues_list_by_pref(code)
-        count = parse_crawling_count(
+        count = parse_venues_list_crawling_count(
           fetch_venues_list_page(venues_list_path(code, 1))
         )
         data = count.times.map do |c|
@@ -36,7 +36,7 @@ module Livefans
         result.body
       end
 
-      def parse_crawling_count(html)
+      def parse_venues_list_crawling_count(html)
         oga = Oga.parse_html(html)
         venues_count_text = oga.xpath('html/body/div/div/h3/span').last.try(:text)
         return 1 unless venues_count_text
