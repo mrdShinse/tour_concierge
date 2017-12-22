@@ -22,7 +22,7 @@ RSpec.describe Livefans::ArtistsList::Crawlable do
   describe '#parse_artists_list' do
     context '151 pages' do
       let(:html) { File.open(Rails.root.join('spec', 'fixtures', 'livefans', 'artists_list', '1_1.html'), 'r') }
-      let(:livefans_root) { target.livefans_root }
+      let(:livefans_root) { target.livefans_root_url }
       subject { target.parse_artists_list html }
 
       it { is_expected.to include(name: 'あぁ!', import: "#{livefans_root}/artists/465") }
@@ -39,6 +39,6 @@ RSpec.describe Livefans::ArtistsList::Crawlable do
 
   describe '#artists_list_path' do
     subject { target.artists_list_path(1, 1) }
-    it { is_expected.to eq('http://www.livefans.jp/venue/search/area/JPN-01/page:1') }
+    it { is_expected.to eq('http://www.livefans.jp/artist/search/all/1/page:1') }
   end
 end

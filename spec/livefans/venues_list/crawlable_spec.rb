@@ -22,7 +22,7 @@ RSpec.describe Livefans::VenuesList::Crawlable do
   describe '#parse_venues_list' do
     context '1821 venues' do
       let(:html) { File.open(Rails.root.join('spec', 'fixtures', 'livefans', 'venues_list', 'jpn_13_page_2.html'), 'r') }
-      let(:livefans_root) { target.livefans_root }
+      let(:livefans_root) { target.livefans_root_url }
       subject { target.parse_venues_list html }
 
       it { is_expected.to include(name: '青山ベルコモンズ', import: "#{livefans_root}/venues/6411") }

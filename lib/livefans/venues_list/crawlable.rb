@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require Rails.root.join 'lib', 'livefans', 'url_helper'
+
 module Livefans
   module VenuesList
     module Crawlable # :nodoc:
+      include Livefans::UrlHelper
+
       def crawl_venues_list
         venues_list = Prefecture.ids.map { |id| crawl_venues_list_by_pref id }.flatten
         venues_list.compact.each do |venue|
@@ -13,27 +17,14 @@ module Livefans
 
       def crawl_venues_list_by_pref(code)
         count = parse_venues_list_crawling_count(
-          fetch_venues_list_page(venues_list_path(code, 1))
+          fetch_page(venues_list_path(code, 1))
         )
         data = count.times.map do |c|
           parse_venues_list(
-            fetch_venues_list_page(venues_list_path(code, c + 1))
+            fetch_page(venues_list_path(code, c + 1))
           )
         end
         data.flatten
-      end
-
-      def venues_list_path(pref_code, page)
-        format(venues_list_path_format, pref_code, page)
-      end
-
-      def fetch_venues_list_page(url)
-        if @last_fetched.present? && (Time.current.to_i - @last_fetched) < 2
-          sleep 1 while (Time.current.to_i - @last_fetched) < 2
-        end
-        @last_fetched = Time.current.to_i
-        result = HTTPClient.get(url)
-        result.body
       end
 
       def parse_venues_list_crawling_count(html)
@@ -52,16 +43,8 @@ module Livefans
           a_tag = venue.xpath('h3/a')
           return nil if a_tag.attribute('href').nil? || a_tag.attribute('href')[0].try(:value).nil?
           { name:   a_tag.text,
-            import: "#{livefans_root}#{a_tag.attribute('href')[0].value}" }
+            import: "#{livefans_root_url}#{a_tag.attribute('href')[0].value}" }
         end
-      end
-
-      def venues_list_path_format
-        livefans_root + '/venue/search/area/JPN-%02d/page:%01d'
-      end
-
-      def livefans_root
-        'http://www.livefans.jp'
       end
     end
   end
