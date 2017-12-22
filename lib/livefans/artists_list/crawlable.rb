@@ -33,6 +33,8 @@ module Livefans
         pagination_last = paginations[paginations.size - 2]
         return 1 unless pagination_last
         pagination_last.try(:text).try(:to_i)
+      rescue
+        1
       end
 
       def parse_artists_list(html)
@@ -44,6 +46,8 @@ module Livefans
           { name:   a_tag.text,
             import: "#{livefans_root_url}#{a_tag.attribute('href')[0].value}" }
         end
+      rescue
+        nil
       end
     end
   end

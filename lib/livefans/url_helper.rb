@@ -29,6 +29,8 @@ module Livefans
       @last_fetched = Time.current.to_i
       result = HTTPClient.get(url)
       result.body
+    rescue
+      ''
     end
   end
 end

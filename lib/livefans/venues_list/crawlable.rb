@@ -34,6 +34,8 @@ module Livefans
         venues_count = venues_count_text.delete('件').try(:to_i)
         return 1 unless venues_count
         venues_count / 16 + 1
+      rescue
+        1
       end
 
       def parse_venues_list(html)
@@ -45,6 +47,8 @@ module Livefans
           { name:   a_tag.text,
             import: "#{livefans_root_url}#{a_tag.attribute('href')[0].value}" }
         end
+      rescue
+        nil
       end
     end
   end
