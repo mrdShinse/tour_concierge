@@ -10,8 +10,16 @@ module Livefans
       format(venues_list_path_format, pref_code, page)
     end
 
+    def artists_list_path(kana_code, page)
+      format(artists_list_path_format, kana_code, page)
+    end
+
     def venues_list_path_format
       livefans_root_url + '/venue/search/area/JPN-%02d/page:%01d'
+    end
+
+    def artists_list_path_format
+      livefans_root_url + '/artist/search/all/%d/page:%d'
     end
 
     def fetch_page(url)
