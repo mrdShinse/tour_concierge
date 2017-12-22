@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217150814) do
+ActiveRecord::Schema.define(version: 20171222161758) do
+
+  create_table "players", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "import", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["import"], name: "index_players_on_import"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
