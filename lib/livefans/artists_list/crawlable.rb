@@ -8,7 +8,7 @@ module Livefans
       include Livefans::UrlHelper
 
       def crawl_artists_list
-        artists_list = Kana.ids.map { |id| crawl_artists_list_by_pref id }.flatten
+        artists_list = Kana.ids.map { |id| crawl_artists_list_by_kana id }.flatten
         artists_list.compact.each do |artist|
           next if artist.empty?
           Artist.find_or_initialize_by(import: artist[:import]) { |v| v.update(artist) }
