@@ -8,9 +8,23 @@ module Livefans
       include Livefans::UrlHelper
 
       def crawl_artists_list
+        artists_list = Kana.ids.map { |id| crawl_artists_list_by_pref id }.flatten
+        artists_list.compact.each do |artist|
+          next if artist.empty?
+          Artist.find_or_initialize_by(import: artist[:import]) { |v| v.update(artist) }
+        end
       end
 
       def crawl_artists_list_by_kana(code)
+        count = parse_artists_list_crawling_count(
+          fetch_page(artists_list_path(code, 1))
+        )
+        data = count.times.map do |c|
+          parse_artists_list(
+            fetch_page(artists_list_path(code, c + 1))
+          )
+        end
+        data.flatten
       end
 
       def parse_artists_list_crawling_count(html)
