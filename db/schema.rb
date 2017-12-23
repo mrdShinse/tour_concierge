@@ -12,15 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20171222161758) do
 
-  create_table "players", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "import", null: false
+  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false, comment: "アーティスト名"
+    t.string "import", null: false, comment: "インポート元"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["import"], name: "index_players_on_import"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,13 +41,13 @@ ActiveRecord::Schema.define(version: 20171222161758) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "venues", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "address"
-    t.string "latlang"
-    t.string "capacity"
-    t.string "url"
-    t.string "import", null: false
+  create_table "venues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false, comment: "会場名"
+    t.text "address", comment: "住所"
+    t.string "latlang", comment: "緯度経度"
+    t.string "capacity", comment: "キャパシティ"
+    t.string "url", comment: "公式URL"
+    t.string "import", null: false, comment: "インポート元"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["import"], name: "index_venues_on_import"
