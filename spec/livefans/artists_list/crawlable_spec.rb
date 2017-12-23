@@ -5,7 +5,7 @@ RSpec.describe Livefans::ArtistsList::Crawlable do
 
   describe '#parse_artists_list_crawling_count' do
     context '151 pages' do
-      let(:html) { File.open(Rails.root.join('spec', 'fixtures', 'livefans', 'artists', 'list_1_1.html'), 'r') }
+      let(:html) { File.open(fixtures_path.join('livefans', 'artists', 'list_1_1.html'), 'r') }
       subject { target.parse_artists_list_crawling_count html }
 
       it { is_expected.to eq 151 }
@@ -21,7 +21,7 @@ RSpec.describe Livefans::ArtistsList::Crawlable do
 
   describe '#parse_artists_list' do
     context '151 pages' do
-      let(:html) { File.open(Rails.root.join('spec', 'fixtures', 'livefans', 'artists', 'list_1_1.html'), 'r') }
+      let(:html) { File.open(fixtures_path.join('livefans', 'artists', 'list_1_1.html'), 'r') }
       let(:livefans_root) { target.livefans_root_url }
       subject { target.parse_artists_list html }
 
