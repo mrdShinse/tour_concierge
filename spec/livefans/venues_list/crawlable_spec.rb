@@ -5,7 +5,7 @@ RSpec.describe Livefans::VenuesList::Crawlable do
 
   describe '#parse_venues_list_crawling_count' do
     context '1821 venues' do
-      let(:html) { File.open(fixtures_path.join('livefans', 'venues', 'list_jpn_13_page_2.html'), 'r') }
+      let(:html) { fetch_fixture venues_fixture_path('list_jpn_13_page_2.html') }
       subject { target.parse_venues_list_crawling_count html }
 
       it { is_expected.to eq 114 }
@@ -21,7 +21,7 @@ RSpec.describe Livefans::VenuesList::Crawlable do
 
   describe '#parse_venues_list' do
     context '1821 venues' do
-      let(:html) { File.open(fixtures_path.join('livefans', 'venues', 'list_jpn_13_page_2.html'), 'r') }
+      let(:html) { fetch_fixture venues_fixture_path('list_jpn_13_page_2.html') }
       let(:livefans_root) { target.livefans_root_url }
       subject { target.parse_venues_list html }
 
