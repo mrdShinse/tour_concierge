@@ -10,7 +10,13 @@ module Livefans
       def crawl_venue_item_all
         ::Venue.find_each(batch_size: 100).each do |v|
           data = crawl_venue_item v
-          v.update(data)
+          begin
+            v.update(data)
+          rescue ActiveRecord::ActiveRecordError => e
+            puts e.message
+            e.backtrace.each { |m| puts m }
+            next
+          end
         end
       end
 
