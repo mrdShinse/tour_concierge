@@ -9,6 +9,13 @@ namespace :jobs do
   end
 
   desc 'kick job.'
+  task :kick_search_venue_item, %i[] => :environment do |_t, _args|
+    puts "#{'*' * 10} starting."
+    Livefans::SearchVenueItemJob.perform_now
+    puts "#{'*' * 10} finished."
+  end
+
+  desc 'kick job.'
   task :kick_search_artists_list, %i[] => :environment do |_t, _args|
     puts "#{'*' * 10} starting."
     Livefans::SearchArtistsListJob.perform_now
