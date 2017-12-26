@@ -33,7 +33,7 @@ module TourConcierge
       g.system_tests      nil
       g.test_framework    :rspec,
                           fixture: true,
-                          fixture_replacement: :factory_girl,
+                          fixture_replacement: :factory_bot,
                           view_specs: false,
                           routing_specs: false,
                           helper_specs: false,
