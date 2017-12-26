@@ -9,6 +9,7 @@ table
       th
 
   tbody
+    = paginate @users
     - @users.each do |user|
       tr
         td = user.name

@@ -10,6 +10,7 @@ table
       th
 
   tbody
+    = paginate @players
     - @players.each do |player|
       tr
         td = player.name

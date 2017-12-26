@@ -15,6 +15,7 @@ table
       th
 
   tbody
+    = paginate @venues
     - @venues.each do |v|
       tr
         td = v.id

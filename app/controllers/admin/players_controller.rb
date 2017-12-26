@@ -7,7 +7,7 @@ module Admin
     # GET /admin/players
     # GET /admin/players.json
     def index
-      @players = ::Player.all
+      @players = ::Player.all.page(params[:page])
     end
 
     # GET /admin/players/1
