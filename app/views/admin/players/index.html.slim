@@ -1,0 +1,23 @@
+h1 Listing admin_players
+
+table
+  thead
+    tr
+      th Name
+      th Import
+      th
+      th
+      th
+
+  tbody
+    - @players.each do |player|
+      tr
+        td = player.name
+        td = player.import
+        td = link_to 'Show', admin_player_path(player)
+        td = link_to 'Edit', edit_admin_player_path(player)
+        td = link_to 'Destroy', admin_player_path(player), data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Player', new_admin_player_path
