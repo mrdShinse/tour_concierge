@@ -1,0 +1,33 @@
+h1 Listing admin_venues
+
+table
+  thead
+    tr
+      th = 'ID'
+      th = '名前'
+      th = '住所'
+      th = 'アクセス'
+      th = '座標'
+      th = 'キャパ'
+      th = 'URL'
+      th
+      th
+      th
+
+  tbody
+    - @venues.each do |v|
+      tr
+        td = v.id
+        td = v.name
+        td = v.address
+        td = v.access
+        td = v.latlang
+        td = v.capacity
+        td = v.url
+        td = link_to 'Show', admin_venue_path(v)
+        td = link_to 'Edit', edit_admin_venue_path(v)
+        td = link_to 'Destroy', admin_venue_path(v), data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Venue', new_admin_venue_path
