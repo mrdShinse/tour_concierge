@@ -14,12 +14,20 @@ module Livefans
       format(artists_list_path_format, kana_code, page)
     end
 
+    def events_list_path(artist_id, page)
+      format(events_list_path_format, artist_id, page)
+    end
+
     def venues_list_path_format
       livefans_root_url + '/venue/search/area/JPN-%02d/page:%01d'
     end
 
     def artists_list_path_format
       livefans_root_url + '/artist/search/all/%d/page:%d'
+    end
+
+    def events_list_path_format
+      livefans_root_url + '/search/artist/%d/page:%d?&sort=e1'
     end
 
     def fetch_page(url)
