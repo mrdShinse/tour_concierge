@@ -7,7 +7,8 @@ module Admin
     # GET /admin/venues
     # GET /admin/venues.json
     def index
-      @venues = ::Venue.all.page(params[:page])
+      @search = ::Venue.ransack(params[:q])
+      @venues = @search.result.page(params[:page])
     end
 
     # GET /admin/venues/1
