@@ -3,27 +3,27 @@
     .row style="margin-top: 10px;"
       .col-md-3
         .form-group
-          = f.label :name_cont_any, 'name', class: 'control-label'
+          = f.label :name_cont_any, Player.human_attribute_name(:name), class: 'control-label'
           = f.text_field :name_cont_any, class: 'form-control input-sm'
 
     .row
       .col-md-2
         = f.button class: 'btn btn-default btn-block' do
-          = '検索'
+          = t('views.actions.search')
 
 .container.content-main style="margin-top: 30px;"
   .panel.panel-default
     .panel-heading
-      h1 Listing admin_players
+      h4 = t('views.index.title', subject: Player.model_name.human)
 
     .panel-body[style="overflow-x: scroll;"]
 
       table.table.table-striped.table-condensed
         thead
           tr
-            th style="min-width:  3em;" Id
-            th style="min-width: 21em;" Name
-            th style="min-width: 21em;" Import
+            th style="min-width:  3em;" = Player.human_attribute_name(:id)
+            th style="min-width: 21em;" = Player.human_attribute_name(:name)
+            th style="min-width: 21em;" = Player.human_attribute_name(:import)
             th
             th
             th

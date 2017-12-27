@@ -1,0 +1,25 @@
+ja:
+  views:
+    actions:
+      search: 検索する
+    index:
+      title: "%{subject}の一覧"
+  activerecord:
+    models:
+      venue: 会場
+      player: アーティスト
+    attributes:
+      venue:
+        name: 会場名
+        address: 住所
+        access: アクセス
+        latlang: 座標
+        capacity: キャパ
+      player:
+        name: アーティスト名
+  attributes:
+    id: ID
+    url: URL
+    import: インポート元
+    created_at: 作成日時
+    updated_at: 更新日時
