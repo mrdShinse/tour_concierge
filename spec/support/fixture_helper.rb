@@ -13,6 +13,10 @@ module FixtureHelper # :nodoc:
     detect_fixture_file_path(fixtures_path.join('livefans', 'venues'), file)
   end
 
+  def events_fixture_path(file)
+    detect_fixture_file_path(fixtures_path.join('livefans', 'events'), file)
+  end
+
   private
 
   def fixtures_path
