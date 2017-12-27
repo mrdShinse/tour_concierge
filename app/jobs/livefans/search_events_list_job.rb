@@ -5,7 +5,7 @@ module Livefans
     queue_as :livefans_search_events_list
 
     def perform(artist, *_args)
-      Livefans::Crawler.new.crawl_events_list(artist)
+      Livefans::Crawler.new.crawl_events_list_by_artist(artist)
     end
   end
 end
