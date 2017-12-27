@@ -14,7 +14,7 @@ module Livefans
           parse_events_list(fetch_page(events_list_path(import_id, c + 1)), import_id)
         end
         data.flatten.compact.each do |event|
-          next if e.empty?
+          next if event.empty?
           ::Event.find_or_initialize_by(import: event[:import]) { |e| e.update(event) }
         end
       end
