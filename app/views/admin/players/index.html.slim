@@ -3,8 +3,9 @@ h1 Listing admin_players
 table
   thead
     tr
-      th Name
-      th Import
+      th style="min-width:  3em;" Id
+      th style="min-width: 21em;" Name
+      th style="min-width: 21em;" Import
       th
       th
       th
@@ -13,6 +14,7 @@ table
     = paginate @players
     - @players.each do |player|
       tr
+        td = player.id
         td = player.name
         td = player.import
         td = link_to 'Show', admin_player_path(player)
