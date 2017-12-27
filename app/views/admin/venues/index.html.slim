@@ -1,34 +1,39 @@
-h1 Listing admin_venues
+.container.content-main
+  .panel.panel-default
+    .panel-heading
+      h1 Listing admin_venues
 
-table
-  thead
-    tr
-      th style="min-width:  3em;" = 'ID'
-      th style="min-width: 21em;" = '名前'
-      th style="min-width: 21em;"= '住所'
-      th style="min-width: 12em;" = 'アクセス'
-      th style="min-width: 12em;" = '座標'
-      th style="min-width: 12em;" = 'キャパ'
-      th style="min-width:  2em;" = 'URL'
-      th
-      th
-      th
+    .panel-body[style="overflow-x: scroll;"]
 
-  tbody
-    = paginate @venues
-    - @venues.each do |v|
-      tr
-        td = v.id
-        td = v.name
-        td = v.address
-        td = v.access
-        td = v.latlang
-        td = v.capacity
-        td = v.url
-        td = link_to 'Show', admin_venue_path(v)
-        td = link_to 'Edit', edit_admin_venue_path(v)
-        td = link_to 'Destroy', admin_venue_path(v), data: { confirm: 'Are you sure?' }, method: :delete
+      table.table.table-striped.table-condensed
+        thead
+          tr
+            th style="min-width:  3em;" = 'ID'
+            th style="min-width: 21em;" = '名前'
+            th style="min-width: 21em;" = '住所'
+            th style="min-width: 12em;" = 'アクセス'
+            th style="min-width: 12em;" = '座標'
+            th style="min-width: 12em;" = 'キャパ'
+            th style="min-width:  2em;" = 'URL'
+            th
+            th
+            th
 
-br
+        tbody
+          = paginate @venues
+          - @venues.each do |v|
+            tr
+              td = v.id
+              td = v.name
+              td = v.address
+              td = v.access
+              td = v.latlang
+              td = v.capacity
+              td = v.url
+              td = link_to 'Show', admin_venue_path(v)
+              td = link_to 'Edit', edit_admin_venue_path(v)
+              td = link_to 'Destroy', admin_venue_path(v), data: { confirm: 'Are you sure?' }, method: :delete
 
-= link_to 'New Venue', new_admin_venue_path
+    br
+
+    = link_to 'New Venue', new_admin_venue_path

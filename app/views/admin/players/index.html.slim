@@ -1,26 +1,31 @@
-h1 Listing admin_players
+.container.content-main
+  .panel.panel-default
+    .panel-heading
+      h1 Listing admin_players
 
-table
-  thead
-    tr
-      th style="min-width:  3em;" Id
-      th style="min-width: 21em;" Name
-      th style="min-width: 21em;" Import
-      th
-      th
-      th
+    .panel-body[style="overflow-x: scroll;"]
 
-  tbody
-    = paginate @players
-    - @players.each do |player|
-      tr
-        td = player.id
-        td = player.name
-        td = player.import
-        td = link_to 'Show', admin_player_path(player)
-        td = link_to 'Edit', edit_admin_player_path(player)
-        td = link_to 'Destroy', admin_player_path(player), data: { confirm: 'Are you sure?' }, method: :delete
+      table.table.table-striped.table-condensed
+        thead
+          tr
+            th style="min-width:  3em;" Id
+            th style="min-width: 21em;" Name
+            th style="min-width: 21em;" Import
+            th
+            th
+            th
 
-br
+        tbody
+          = paginate @players
+          - @players.each do |player|
+            tr
+              td = player.id
+              td = player.name
+              td = player.import
+              td = link_to 'Show', admin_player_path(player)
+              td = link_to 'Edit', edit_admin_player_path(player)
+              td = link_to 'Destroy', admin_player_path(player), data: { confirm: 'Are you sure?' }, method: :delete
 
-= link_to 'New Player', new_admin_player_path
+      br
+
+      = link_to 'New Player', new_admin_player_path
