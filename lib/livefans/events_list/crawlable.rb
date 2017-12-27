@@ -11,7 +11,7 @@ module Livefans
         import_id = artist.import.split('/').last
         count = parse_events_list_crawling_count fetch_page(events_list_path(import_id, 1))
         data = count.times.map do |c|
-          parse_venues_list fetch_page(events_list_path(import_id, c + 1), import_id)
+          parse_events_list(fetch_page(events_list_path(import_id, c + 1)), import_id)
         end
         data.flatten.compact.each do |event|
           next if e.empty?
