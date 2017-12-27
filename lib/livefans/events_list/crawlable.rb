@@ -7,6 +7,18 @@ module Livefans
     module Crawlable # :nodoc:
       include Livefans::UrlHelper
 
+      def crawl_events_list_by_artist(artist)
+        import_id = artist.import.split('/').last
+        count = parse_events_list_crawling_count fetch_page(events_list_path_format(import_id, 1))
+        data = count.times.map do |c|
+          parse_venues_list fetch_page(events_list_path_format(import_id, c + 1), import_id)
+        end
+        data.flatten.compact.each do |event|
+          next if e.empty?
+          ::Event.find_or_initialize_by(import: event[:import]) { |e| e.update(event) }
+        end
+      end
+
       def parse_events_list_crawling_count(html)
         oga = Oga.parse_html(html)
         count_text = oga.xpath('html/body/div/div/div/h3/span').text
