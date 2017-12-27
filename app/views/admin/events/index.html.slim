@@ -1,0 +1,46 @@
+.container
+  = search_form_for @search, url: admin_events_path do |f|
+    .row style="margin-top: 10px;"
+      .col-md-3
+        .form-group
+          = f.label :name_cont_any, Event.human_attribute_name(:name), class: 'control-label'
+          = f.text_field :name_cont_any, class: 'form-control input-sm'
+
+    .row
+      .col-md-2
+        = f.button class: 'btn btn-default btn-block' do
+          = t('views.actions.search')
+
+.container.content-main style="margin-top: 30px;"
+  .panel.panel-default
+    .panel-heading
+      h4 = t('views.index.title', subject: Event.model_name.human)
+
+    .panel-body style="overflow-x: scroll;"
+      table.table.table-striped.table-condensed
+        thead
+          tr
+            th Player
+            th Venue
+            th Name
+            th Start at
+            th Import
+            th
+            th
+            th
+
+        tbody
+          - @events.each do |event|
+            tr
+              td = event.player_id
+              td = event.venue_id
+              td = event.name
+              td = event.start_at
+              td = event.import
+              td = link_to 'Show', admin_event_path(event)
+              td = link_to 'Edit', edit_admin_event_path(event)
+              td = link_to 'Destroy', admin_event_path(event), data: { confirm: 'Are you sure?' }, method: :delete
+
+      br
+
+      = link_to 'New Event', new_admin_event_path

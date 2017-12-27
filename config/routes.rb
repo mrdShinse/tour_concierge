@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :players
     resources :venues
     resources :users
+    resources :events
   end
 
   root to: 'home#index'
