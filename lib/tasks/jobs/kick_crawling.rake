@@ -26,7 +26,7 @@ namespace :jobs do
   task :kick_search_events_list, %i[] => :environment do |_t, _args|
     puts "#{'*' * 10} starting."
     ::Player.find_each(batch_size: 100).each do |player|
-      puts "get #{player.import_id}..."
+      puts "get #{player.import}..."
       Livefans::SearchEventsListJob.perform_now(player)
     end
     puts "#{'*' * 10} finished."
