@@ -30,6 +30,7 @@
             th
 
         tbody
+          = paginate @events
           - @events.each do |event|
             tr
               td = event.player_id
