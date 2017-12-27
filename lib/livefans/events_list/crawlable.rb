@@ -35,9 +35,9 @@ module Livefans
         event_list = oga.xpath('html/body/div/div/div/div/div')
                         .select { |e| e.attribute('class').try(:value) == 'whiteBack midBox fes' }
         event_list.map do |e|
-          { import: "#{livefans_root_url}#{e.children[1].attribute('href').value}",
-            artist_id: artist_id,
-            name: e.xpath('h3')[0].text }
+          { import:    "#{livefans_root_url}#{e.children[1].attribute('href').value}",
+            player_id: artist_id,
+            name:      e.xpath('h3')[0].text }
         end
       rescue
         []
