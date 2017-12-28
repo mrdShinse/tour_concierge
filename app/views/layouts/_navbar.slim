@@ -1,13 +1,15 @@
-nav.navbar.navbar-default
+nav.navbar.navbar-default style="margin-bottom: 0px;"
   .container-fluid
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         - if user_signed_in?
           li
-            = link_to 'Venues', admin_venues_path
+            = link_to ::Venue.model_name.human, admin_venues_path
           li
-            = link_to 'Players', admin_players_path
+            = link_to ::Player.model_name.human, admin_players_path
           li
-            = link_to 'Users', admin_users_path
+            = link_to ::Event.model_name.human, admin_events_path
+          li
+            = link_to ::User.model_name.human, admin_users_path
           li
             = link_to 'logout', destroy_user_session_path, method: :delete

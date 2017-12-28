@@ -1,5 +1,4 @@
-p#notice = notice
-
+= sanitize @venue.attributes.map { |v| content_tag(:p) { concat content_tag(:strong, "#{v[0]}:"); concat v[1] } }.join
 
 => link_to 'Edit', edit_admin_venue_path(@venue)
 '|

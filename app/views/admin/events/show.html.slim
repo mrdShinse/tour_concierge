@@ -1,21 +1,5 @@
-p#notice = notice
+= sanitize @event.attributes.map { |v| content_tag(:p) { concat content_tag(:strong, "#{v[0]}:"); concat v[1] } }.join
 
-p
-  strong Player:
-  = @event.player_id
-p
-  strong Venue:
-  = @event.venue_id
-p
-  strong Name:
-  = @event.name
-p
-  strong Start at:
-  = @event.start_at
-p
-  strong Import:
-  = @event.import
-
-=> link_to 'Edit', admin_edit_event_path(@event)
+=> link_to 'Edit', edit_admin_event_path(@event)
 '|
 =< link_to 'Back', admin_events_path
