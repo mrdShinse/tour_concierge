@@ -9,6 +9,8 @@ ja:
       venue: 会場
       player: アーティスト
     attributes:
+      event:
+        name: イベント名
       venue:
         name: 会場名
         zipcode: 郵便番号
