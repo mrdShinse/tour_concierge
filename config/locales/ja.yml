@@ -17,6 +17,7 @@ ja:
         capacity: キャパ
       player:
         name: アーティスト名
+        events_count: Live数
   attributes:
     id: ID
     url: URL

@@ -21,9 +21,10 @@
       table.table.table-striped.table-condensed
         thead
           tr
-            th style="min-width:  3em;" = Player.human_attribute_name(:id)
-            th style="min-width: 21em;" = Player.human_attribute_name(:name)
-            th style="min-width: 21em;" = Player.human_attribute_name(:import)
+            th style="min-width:  3em;" = sort_link(@search, :id)    { Player.human_attribute_name(:id) }
+            th style="min-width: 12em;" = sort_link(@search, :name)  { Player.human_attribute_name(:name) }
+            th style="min-width:  3em;" = Player.human_attribute_name(:events_count)
+            th style="min-width: 21em;" = sort_link(@search, :import) { Player.human_attribute_name(:import) }
             th
             th
             th
@@ -34,6 +35,7 @@
             tr
               td = player.id
               td = player.name
+              td = player.events.count
               td = player.import
               td = link_to 'Show', admin_player_path(player)
               td = link_to 'Edit', edit_admin_player_path(player)
