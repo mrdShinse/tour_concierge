@@ -8,10 +8,9 @@ module Livefans
       include Livefans::UrlHelper
 
       def crawl_events_list_by_artist(artist)
-        import_id = artist.import.split('/').last
         count = parse_events_list_crawling_count fetch_page(events_list_path(import_id, 1))
         data = count.times.map do |c|
-          parse_events_list(fetch_page(events_list_path(import_id, c + 1)), import_id)
+          parse_events_list(fetch_page(events_list_path(import_id, c + 1)))
         end
         data.flatten.compact.each do |event|
           next if event.empty?
@@ -30,7 +29,7 @@ module Livefans
         1
       end
 
-      def parse_events_list(html, artist_id)
+      def parse_events_list(html)
         oga = Oga.parse_html(html)
         event_list = oga.xpath('html/body/div/div/div/div/div')
                         .select { |e| e.attribute('class').try(:value) == 'whiteBack midBox fes' }

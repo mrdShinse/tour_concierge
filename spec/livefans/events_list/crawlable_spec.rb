@@ -24,7 +24,7 @@ RSpec.describe Livefans::EventsList::Crawlable do
     context '831 pages' do
       let(:html) { fixture }
       let(:livefans_root) { target.livefans_root_url }
-      subject { target.parse_events_list(html, 25) }
+      subject { target.parse_events_list(html) }
 
       it { is_expected.to include(name: '10-FEET "Fin" TOUR 2017-2018', import: "#{livefans_root}/events/854904") }
       it { is_expected.to include(name: '10-FEET "Fin" TOUR 2017-2018', import: "#{livefans_root}/events/854872") }
@@ -32,7 +32,7 @@ RSpec.describe Livefans::EventsList::Crawlable do
 
     context 'empty html' do
       let(:html) { '' }
-      subject { target.parse_events_list(html, 25) }
+      subject { target.parse_events_list(html) }
 
       it { is_expected.to eq([]) }
     end
