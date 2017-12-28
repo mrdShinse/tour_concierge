@@ -11,6 +11,7 @@ ja:
     attributes:
       venue:
         name: 会場名
+        zipcode: 郵便番号
         address: 住所
         access: アクセス
         latlang: 座標

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227121128) do
+ActiveRecord::Schema.define(version: 20171228123045) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "player_id", null: false, comment: "アーティストID"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171227121128) do
 
   create_table "venues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false, comment: "会場名"
+    t.string "zipcode", limit: 7, comment: "郵便番号"
     t.text "address", comment: "住所"
     t.text "access", comment: "アクセス"
     t.string "latlang", comment: "緯度経度"

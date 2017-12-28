@@ -30,12 +30,14 @@ module Livefans
         html_venue = oga.xpath('html/body/div/div/div/div/div/section').first
         iframe =   html_venue.children[1]
         tbody =    html_venue.children[7].children[1]
-        address =  parse_address slice_venue_item(tbody.children[1].text)
+        a = parse_address(slice_venue_item(tbody.children[1].text))
+        zipcode =  a[:zipcode]
+        address =  a[:address]
         access =   slice_venue_item(tbody.children[3].text)
         latlang =  parse_latlang(iframe.attributes[1].value)
         capacity = slice_venue_item(tbody.children[5].text)
         url =      tbody.children[11].children[3].children[0].attribute('href').value
-        { address: address, access: access, latlang: latlang, capacity: capacity, url: url }
+        { address: address, zipcode: zipcode, access: access, latlang: latlang, capacity: capacity, url: url }
       rescue
         {}
       end
@@ -49,8 +51,9 @@ module Livefans
       end
 
       def parse_address(text)
-        r = text.match(/(〒\d{3}-\d{4})(.*)/)
-        "#{r[1]} #{r[2]}"
+        r = text.match(/(〒)(\d{3}-\d{4})(.*)/)
+        { zipcode: r[2].delete('-'),
+          address: r[3] }
       rescue
         ''
       end

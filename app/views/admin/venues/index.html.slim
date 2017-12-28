@@ -33,7 +33,8 @@
           tr
             th style="min-width:  3em;" = ::Venue.human_attribute_name(:id)
             th style="min-width: 21em;" = ::Venue.human_attribute_name(:name)
-            th style="min-width: 21em;" = ::Venue.human_attribute_name(:address)
+            th style="min-width:  6em;" = ::Venue.human_attribute_name(:zipcode)
+            th style="min-width: 15em;" = ::Venue.human_attribute_name(:address)
             th style="min-width: 12em;" = ::Venue.human_attribute_name(:access)
             th style="min-width: 12em;" = ::Venue.human_attribute_name(:latlang)
             th style="min-width: 12em;" = ::Venue.human_attribute_name(:capacity)
@@ -48,6 +49,7 @@
             tr
               td = v.id
               td = v.name
+              td = v.zipcode
               td = v.address
               td = v.access
               td = v.latlang
