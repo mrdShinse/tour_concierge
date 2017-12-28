@@ -14,7 +14,7 @@ ja:
         zipcode: 郵便番号
         address: 住所
         access: アクセス
-        latlang: 座標
+        latlong: 座標
         capacity: キャパ
       player:
         name: アーティスト名

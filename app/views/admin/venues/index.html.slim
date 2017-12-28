@@ -36,7 +36,7 @@
             th style="min-width:  6em;" = ::Venue.human_attribute_name(:zipcode)
             th style="min-width: 15em;" = ::Venue.human_attribute_name(:address)
             th style="min-width: 12em;" = ::Venue.human_attribute_name(:access)
-            th style="min-width: 12em;" = ::Venue.human_attribute_name(:latlang)
+            th style="min-width: 12em;" = ::Venue.human_attribute_name(:latlong)
             th style="min-width: 12em;" = ::Venue.human_attribute_name(:capacity)
             th style="min-width:  2em;" = ::Venue.human_attribute_name(:url)
             th
@@ -52,7 +52,7 @@
               td = v.zipcode
               td = v.address
               td = v.access
-              td = v.latlang
+              td = v.latlong
               td = v.capacity
               td = v.url
               td = link_to 'Show', admin_venue_path(v)

@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20171228131539) do
     t.string "zipcode", limit: 7, comment: "郵便番号"
     t.text "address", comment: "住所"
     t.text "access", comment: "アクセス"
-    t.string "latlang", comment: "緯度経度"
     t.float "latitude", limit: 53, comment: "緯度"
     t.float "longitude", limit: 53, comment: "経度"
     t.string "capacity", comment: "キャパシティ"
