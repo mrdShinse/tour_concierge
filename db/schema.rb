@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171228123045) do
+ActiveRecord::Schema.define(version: 20171228131539) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "player_id", null: false, comment: "アーティストID"
@@ -58,12 +58,15 @@ ActiveRecord::Schema.define(version: 20171228123045) do
     t.text "address", comment: "住所"
     t.text "access", comment: "アクセス"
     t.string "latlang", comment: "緯度経度"
+    t.float "latitude", limit: 53, comment: "緯度"
+    t.float "longitude", limit: 53, comment: "経度"
     t.string "capacity", comment: "キャパシティ"
     t.text "url", comment: "公式URL"
     t.string "import", null: false, comment: "インポート元"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["import"], name: "index_venues_on_import"
+    t.index ["latitude", "longitude"], name: "index_venues_on_latitude_and_longitude"
   end
 
 end

@@ -43,6 +43,7 @@ gem 'devise'
 
 # models
 gem 'active_hash'
+gem 'geocoder'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
 # pagination
