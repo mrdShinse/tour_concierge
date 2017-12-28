@@ -30,14 +30,16 @@ module Livefans
         html_venue = oga.xpath('html/body/div/div/div/div/div/section').first
         iframe =   html_venue.children[1]
         tbody =    html_venue.children[7].children[1]
-        a = parse_address(slice_venue_item(tbody.children[1].text))
-        zipcode =  a[:zipcode]
-        address =  a[:address]
-        access =   slice_venue_item(tbody.children[3].text)
-        latlang =  parse_latlang(iframe.attributes[1].value)
-        capacity = slice_venue_item(tbody.children[5].text)
-        url =      tbody.children[11].children[3].children[0].attribute('href').value
-        { address: address, zipcode: zipcode, access: access, latlang: latlang, capacity: capacity, url: url }
+        address =  parse_address(slice_venue_item(tbody.children[1].text))
+        latlong =  parse_latlong(iframe.attributes[1].value)
+
+        { address:   address[:address],
+          zipcode:   address[:zipcode],
+          access:    slice_venue_item(tbody.children[3].text),
+          latitude:  latlong[:latitude].to_d,
+          longitude: latlong[:longitude].to_d,
+          capacity:  slice_venue_item(tbody.children[5].text),
+          url:       tbody.children[11].children[3].children[0].attribute('href').value }
       rescue
         {}
       end
@@ -55,15 +57,16 @@ module Livefans
         { zipcode: r[2].delete('-'),
           address: r[3] }
       rescue
-        ''
+        {}
       end
 
-      def parse_latlang(text)
+      def parse_latlong(text)
         lat  = text.match(/latitude=([\d\.]*)/)[1]
         lang = text.match(/longitude=([\d\.]*)/)[1]
-        "#{lat}-#{lang}"
+        { latitude:  lat,
+          longitude: lang }
       rescue
-        ''
+        {}
       end
     end
   end

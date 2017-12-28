@@ -9,11 +9,13 @@ RSpec.describe Livefans::VenueItem::Crawlable do
       let(:livefans_root) { target.livefans_root_url }
       let(:result) do
         {
-          address:  '〒150-0043 東京都渋谷区道玄坂2-14-8 2F',
-          access:   '神泉駅 徒歩3分 渋谷駅ハチ公口 徒歩7分',
-          latlang:  '35.658733-139.695588',
-          capacity: '1,300人',
-          url:      'http://shibuya-o.com/'
+          zipcode:   '1500043',
+          address:   '東京都渋谷区道玄坂2-14-8 2F',
+          access:    '神泉駅 徒歩3分 渋谷駅ハチ公口 徒歩7分',
+          latitude:  35.658733,
+          longitude: 139.695588,
+          capacity:  '1,300人',
+          url:       'http://shibuya-o.com/'
         }
       end
       subject { target.parse_venue_item html }
