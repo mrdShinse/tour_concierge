@@ -8,6 +8,7 @@ module Livefans
       include Livefans::UrlHelper
 
       def crawl_events_list_by_artist(artist)
+        import_id = artist.import.split('/').last
         count = parse_events_list_crawling_count fetch_page(events_list_path(import_id, 1))
         data = count.times.map do |c|
           parse_events_list(fetch_page(events_list_path(import_id, c + 1)))
