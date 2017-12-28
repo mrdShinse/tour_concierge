@@ -15,7 +15,7 @@ module Livefans
         end
         data.flatten.compact.each do |event|
           next if event.empty?
-          ::Event.find_or_initialize_by(import: event[:import]) { |e| e.update(event) }
+          artist.events.find_or_initialize_by(import: event[:import]) { |e| e.update(event) }
         end
       end
 
@@ -36,7 +36,6 @@ module Livefans
                         .select { |e| e.attribute('class').try(:value) == 'whiteBack midBox fes' }
         event_list.map do |e|
           { import:    "#{livefans_root_url}#{e.children[1].attribute('href').value}",
-            player_id: artist_id,
             name:      e.xpath('h3')[0].text }
         end
       rescue

@@ -26,8 +26,8 @@ RSpec.describe Livefans::EventsList::Crawlable do
       let(:livefans_root) { target.livefans_root_url }
       subject { target.parse_events_list(html, 25) }
 
-      it { is_expected.to include(name: '10-FEET "Fin" TOUR 2017-2018', import: "#{livefans_root}/events/854904", player_id: 25) }
-      it { is_expected.to include(name: '10-FEET "Fin" TOUR 2017-2018', import: "#{livefans_root}/events/854872", player_id: 25) }
+      it { is_expected.to include(name: '10-FEET "Fin" TOUR 2017-2018', import: "#{livefans_root}/events/854904") }
+      it { is_expected.to include(name: '10-FEET "Fin" TOUR 2017-2018', import: "#{livefans_root}/events/854872") }
     end
 
     context 'empty html' do
