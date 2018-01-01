@@ -27,13 +27,13 @@ module Livefans
       def parse_event_item_start_at(oga)
         text = oga.xpath('html/body/div/div/div/div/div/div/p')[0].text
         m = text.match(%r{(\d{4})/(\d{2})/(\d{2}).*(\d{2}):(\d{2}).*})
-        Time.zone.local(m[1], m[2], m[3], m[4], m[5])
+        Time.zone.local(m[1], m[2], m[3], m.try(:[], 4), m.try(:[], 5))
       end
 
       def parse_event_item_venue_id(oga)
-        v_import = oga.xpath('html/body/div/div/div/div/div/div/address/a')
-                      .attribute('href')[0]
-                      .value
+        address_tag = oga.xpath('html/body/div/div/div/div/div/div/address/a')
+        return nil if address_tag.blank?
+        v_import = address_tag.attribute('href')[0].value
         ::Venue.find_by(import: "#{livefans_root_url}#{v_import}").try(:id)
       end
     end

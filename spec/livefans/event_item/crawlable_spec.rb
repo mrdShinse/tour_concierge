@@ -24,5 +24,16 @@ RSpec.describe Livefans::EventItem::Crawlable do
 
       it { is_expected.to eq result }
     end
+
+    context 'html without venue_id' do
+      let(:html) { fetch_fixture events_fixture_path('event_item_577431.html') }
+      let(:result) do
+        { start_at: Time.zone.local(2011, 10, 15, 15, 15),
+          venue_id: nil }
+      end
+      subject { target.parse_event_item html }
+
+      it { is_expected.to eq result }
+    end
   end
 end
