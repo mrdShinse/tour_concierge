@@ -46,7 +46,7 @@
               td = event.player.name
               td = event.venue.try(:name)
               td = event.name
-              td = l(event.start_at)
+              td = event.start_at.nil? ? '' : l(event.start_at)
               td = event.import
               td = link_to 'Show', admin_event_path(event)
               td = link_to 'Edit', edit_admin_event_path(event)

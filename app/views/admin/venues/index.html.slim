@@ -33,6 +33,7 @@
           tr
             th style="min-width:  3em;" = ::Venue.human_attribute_name(:id)
             th style="min-width: 21em;" = ::Venue.human_attribute_name(:name)
+            th style="min-width:  3em"  = ::Venue.human_attribute_name(:events_count)
             th style="min-width:  6em;" = ::Venue.human_attribute_name(:zipcode)
             th style="min-width: 15em;" = ::Venue.human_attribute_name(:address)
             th style="min-width: 12em;" = ::Venue.human_attribute_name(:access)
@@ -49,6 +50,7 @@
             tr
               td = v.id
               td = v.name
+              td = link_to(v.events.count, admin_events_path(q: { venue_id_eq: v.id }))
               td = v.zipcode
               td = v.address
               td = v.access

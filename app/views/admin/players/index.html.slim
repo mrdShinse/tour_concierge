@@ -35,7 +35,7 @@
             tr
               td = player.id
               td = player.name
-              td = player.events.count
+              td = link_to(player.events.count, admin_events_path(q: { player_id_eq: player.id }))
               td = player.import
               td = link_to 'Show', admin_player_path(player)
               td = link_to 'Edit', edit_admin_player_path(player)

@@ -20,10 +20,10 @@ ja:
         capacity: キャパ
       player:
         name: アーティスト名
-        events_count: Live数
   attributes:
     id: ID
     url: URL
     import: インポート元
     created_at: 作成日時
     updated_at: 更新日時
+    events_count: Live数
