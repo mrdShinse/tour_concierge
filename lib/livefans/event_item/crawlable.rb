@@ -34,7 +34,7 @@ module Livefans
         v_import = oga.xpath('html/body/div/div/div/div/div/div/address/a')
                       .attribute('href')[0]
                       .value
-        ::Venue.find_by(import: "#{livefans_root_url}#{v_import}").id
+        ::Venue.find_by(import: "#{livefans_root_url}#{v_import}").try(:id)
       end
     end
   end

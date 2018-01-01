@@ -2,5 +2,5 @@
 
 class Event < ApplicationRecord # :nodoc:
   belongs_to :player
-  belongs_to :venue
+  belongs_to :venue, optional: true
 end
