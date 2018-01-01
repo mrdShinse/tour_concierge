@@ -11,6 +11,11 @@
           = f.label :player_name_cont_any, Player.human_attribute_name(:name), class: 'control-label'
           = f.text_field :player_name_cont_any, class: 'form-control input-sm'
 
+      .col-md-3
+        .form-group
+          = f.label :venue_name_cont_any, Venue.human_attribute_name(:name), class: 'control-label'
+          = f.text_field :venue_name_cont_any, class: 'form-control input-sm'
+
     .row
       .col-md-2
         = f.button class: 'btn btn-default btn-block' do
@@ -26,9 +31,9 @@
         thead
           tr
             th style="min-width: 12em;" = sort_link(@search, :player_name) { Player.human_attribute_name(:name) }
-            th style="min-width:  3em;" = sort_link(@search, :venue_name)  { Venue.human_attribute_name(:name) }
-            th style="min-width: 12em;" = sort_link(@search, :name)        { Event.human_attribute_name(:name) }
-            th style="min-width:  8em;" = sort_link(@search, :start_at)    { Event.human_attribute_name(:start_at) }
+            th style="min-width: 12em;" = sort_link(@search, :venue_name)  { Venue.human_attribute_name(:name) }
+            th style="min-width: 24em;" = sort_link(@search, :name)        { Event.human_attribute_name(:name) }
+            th style="min-width: 12em;" = sort_link(@search, :start_at)    { Event.human_attribute_name(:start_at) }
             th style="min-width:  8em;" = sort_link(@search, :import)      { Event.human_attribute_name(:import) }
             th
             th
@@ -39,9 +44,9 @@
           - @events.each do |event|
             tr
               td = event.player.name
-              td = event.venue_id
+              td = event.venue.try(:name)
               td = event.name
-              td = event.start_at
+              td = l(event.start_at)
               td = event.import
               td = link_to 'Show', admin_event_path(event)
               td = link_to 'Edit', edit_admin_event_path(event)
