@@ -36,4 +36,20 @@ RSpec.describe Livefans::EventItem::Crawlable do
       it { is_expected.to eq result }
     end
   end
+
+  describe '#parse_event_item_start_at' do
+    context '2014/09/23 (火)' do
+      let(:result) { Time.zone.local(2014, 9, 23, nil, nil) }
+      subject { target.parse_event_item_start_at '2014/09/23 (火)' }
+
+      it { is_expected.to eq result }
+    end
+
+    context '2017/12/29 (金)　19:30 出演' do
+      let(:result) { Time.zone.local(2017, 12, 29, 19, 30) }
+      subject { target.parse_event_item_start_at '2017/12/29 (金)　19:30 出演' }
+
+      it { is_expected.to eq result }
+    end
+  end
 end

@@ -18,16 +18,15 @@ module Livefans
 
       def parse_event_item(html)
         oga = Oga.parse_html(html)
-        { start_at: parse_event_item_start_at(oga),
+        { start_at: parse_event_item_start_at(oga.xpath('html/body/div/div/div/div/div/div/p')[0].text),
           venue_id: parse_event_item_venue_id(oga) }
       rescue
         {}
       end
 
-      def parse_event_item_start_at(oga)
-        text = oga.xpath('html/body/div/div/div/div/div/div/p')[0].text
-        m = text.match(%r{(\d{4})/(\d{2})/(\d{2}).*(\d{2}):(\d{2}).*})
-        Time.zone.local(m[1], m[2], m[3], m.try(:[], 4), m.try(:[], 5))
+      def parse_event_item_start_at(text)
+        m = text.match(%r{(\d{4})/(\d{2})/(\d{2})(.*(\d{2}):(\d{2}).*)?})
+        Time.zone.local(m[1], m[2], m[3], m.try(:[], 5), m.try(:[], 6))
       end
 
       def parse_event_item_venue_id(oga)
