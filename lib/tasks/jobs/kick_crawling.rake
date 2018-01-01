@@ -31,4 +31,14 @@ namespace :jobs do
     end
     puts "#{'*' * 10} finished."
   end
+
+  desc 'kick job.'
+  task :kick_search_event_items, %i[] => :environment do |_t, _args|
+    puts "#{'*' * 10} starting."
+    ::Event.find_each(batch_size: 100).each do |event|
+      puts "get #{event.import}..."
+      Livefans::SearchEventItemJob.perform_now(event)
+    end
+    puts "#{'*' * 10} finished."
+  end
 end

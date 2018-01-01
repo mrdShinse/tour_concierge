@@ -5,8 +5,6 @@ require Rails.root.join 'lib', 'livefans', 'url_helper'
 module Livefans
   module VenueItem
     module Crawlable # :nodoc:
-      include Livefans::UrlHelper
-
       def crawl_venue_item_all
         ::Venue.find_each(batch_size: 100).each do |v|
           data = crawl_venue_item v

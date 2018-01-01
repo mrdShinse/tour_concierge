@@ -5,7 +5,14 @@ require Rails.root.join 'lib', 'livefans', 'url_helper'
 module Livefans
   module EventItem
     module Crawlable # :nodoc:
-      include Livefans::UrlHelper
+      def crawl_event_item(event)
+        html = fetch_page(event.import)
+        data = parse_event_item html
+        event.update!(data)
+      rescue ActiveRecord::ActiveRecordError => e
+        puts e.message
+        e.backtrace.each { |m| puts m }
+      end
 
       def parse_event_item(html)
         oga = Oga.parse_html(html)
