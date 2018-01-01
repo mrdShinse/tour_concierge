@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171228131539) do
+ActiveRecord::Schema.define(version: 20180101160747) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "player_id", null: false, comment: "アーティストID"
     t.integer "venue_id", comment: "会場ID"
     t.string "name", comment: "イベント名"
-    t.time "start_at", comment: "開始時間"
+    t.datetime "start_at", comment: "開始時間"
     t.string "import", null: false, comment: "インポート元"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
