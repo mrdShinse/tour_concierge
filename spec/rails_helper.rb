@@ -5,7 +5,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+abort('The Rails environment is NOT running in test mode!') unless Rails.env.test?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -35,8 +35,29 @@ RSpec.configure do |config|
   config.formatter = :documentation
   config.include FixtureHelper
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # FactoryBot
+  config.include FactoryBot::Syntax::Methods
+  config.before(:all) do
+    FactoryBot.reload
+  end
+
+  # Database cleaner
+  require 'database_cleaner'
+  database_cleaning = -> { DatabaseCleaner.clean_with :truncation }
+
+  config.before(:suite) do
+    load Rails.root.join('db', 'seeds.rb')
+    database_cleaning.call
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    database_cleaning.call
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

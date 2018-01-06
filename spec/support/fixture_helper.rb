@@ -20,7 +20,7 @@ module FixtureHelper # :nodoc:
   private
 
   def fixtures_path
-    Pathname.new fixture_path
+    Pathname.new "#{::Rails.root}/spec/fixtures"
   end
 
   def detect_fixture_file_path(base, file)

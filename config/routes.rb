@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     resources :events
   end
 
+  namespace :api do
+    namespace :events do
+      get :nearby
+    end
+  end
+
   root to: 'home#index'
   get :dashboard, to: 'dashboard#index'
 end
