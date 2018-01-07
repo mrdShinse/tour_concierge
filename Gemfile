@@ -43,6 +43,7 @@ gem 'devise'
 
 # models
 gem 'active_hash'
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'geocoder'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
