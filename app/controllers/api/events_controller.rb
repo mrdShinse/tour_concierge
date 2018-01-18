@@ -7,6 +7,7 @@ module Api
                     .future
                     .order(start_at: :asc)
                     .limit(20)
+                    .eager_load(:venue, :player)
       render json: {
         ok: 1,
         events: ActiveModelSerializers::SerializableResource.new(events, each_serializer: EventSerializer).as_json
