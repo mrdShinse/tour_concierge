@@ -3,7 +3,7 @@
 module Api
   class EventsController < ApiBaseController # :nodoc:
     def nearby
-      events = Event.nearby(search_param[:lat], search_param[:long])
+      events = Event.nearby(search_param[:lat], search_param[:long], search_param[:distance] ? search_param[:distance] : 20)
                     .future
                     .limit(20)
       render json: {
@@ -23,7 +23,7 @@ module Api
     private
 
     def search_param
-      params.require(:q).permit(:lat, :long)
+      params.require(:q).permit(:lat, :long, :distance)
     end
   end
 end

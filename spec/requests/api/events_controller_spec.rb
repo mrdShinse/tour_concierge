@@ -54,20 +54,37 @@ RSpec.describe Api::EventsController, type: :request do
       end
 
       context 'nearby events are display.' do
-        let!(:venue)  { create(:venue, latitude: 43, longitude: 144) }
+        let!(:venue)  { create(:venue, latitude: 43, longitude: 144.001) }
         let!(:events) { create_list(:event, 2, venue: venue, start_at: Time.current.tomorrow) }
 
-        let(:params) { { q: { lat: 43, long: 144 } } }
-        before { get api_events_nearby_path, params: params }
-        subject { response }
+        context 'with distance 0' do
+          let(:params) { { q: { lat: 43, long: 144, distance: 0 } } }
+          before { get api_events_nearby_path, params: params }
+          subject { response }
 
-        it { is_expected.to be_success }
-        it { is_expected.to have_http_status(200) }
-        it 'have events' do
-          body = JSON.parse(response.body)
-          expect(body['ok']).to           eq 1
-          expect(body['events']).to       be_truthy
-          expect(body['events'].count).to be 2
+          it { is_expected.to be_success }
+          it { is_expected.to have_http_status(200) }
+          it 'have NO events' do
+            body = JSON.parse(response.body)
+            expect(body['ok']).to        eq 1
+            expect(body['events']).to    be_truthy
+            expect(body['events']).to eq []
+          end
+        end
+
+        context 'without distance' do
+          let(:params) { { q: { lat: 43, long: 144 } } }
+          before { get api_events_nearby_path, params: params }
+          subject { response }
+
+          it { is_expected.to be_success }
+          it { is_expected.to have_http_status(200) }
+          it 'have events' do
+            body = JSON.parse(response.body)
+            expect(body['ok']).to           eq 1
+            expect(body['events']).to       be_truthy
+            expect(body['events'].count).to be 2
+          end
         end
       end
     end
