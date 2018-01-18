@@ -27,6 +27,6 @@ class EventSerializer < ApplicationSerializer # :nodoc:
   end
 
   class VenueSerializer < ApplicationSerializer # :nodoc:
-    attributes %w[latitude longitude]
+    attributes %w[latitude longitude name]
   end
 end
