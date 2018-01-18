@@ -5,6 +5,7 @@ module Api
     def nearby
       events = Event.nearby(search_param[:lat], search_param[:long], search_param[:distance] ? search_param[:distance] : 20)
                     .future
+                    .order(start_at: :asc)
                     .limit(20)
       render json: {
         ok: 1,
