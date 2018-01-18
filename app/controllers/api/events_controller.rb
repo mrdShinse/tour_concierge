@@ -5,6 +5,7 @@ module Api
     def nearby
       events = Event.nearby(search_param[:lat], search_param[:long], search_param[:distance] ? search_param[:distance] : 20)
                     .future
+                    .start_until(search_param_from)
                     .order(start_at: :asc)
                     .limit(search_param_limit)
                     .eager_load(:venue, :player)
@@ -35,6 +36,13 @@ module Api
         20
       end
     end
+
+    def search_param_from
+      if search_param[:from]
+        search_param[:from].to_i <= 0 ? 1 : search_param[:from].to_i
+      else
+        7
+      end
     end
   end
 end
