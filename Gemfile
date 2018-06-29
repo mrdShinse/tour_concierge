@@ -16,17 +16,17 @@ gem 'puma', '~> 3.7'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker'
+gem 'webpacker', '>= 3.0.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # views
-gem 'bootstrap-sass', '~> 3.3'
-gem 'coffee-rails', '~> 4.2'
-gem 'font-awesome-rails', '~> 4.7'
-gem 'jquery-rails'
-gem 'sass-rails', '~> 5.0'
-gem 'slim-rails', '~> 3.1'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
+gem 'jquery-rails', '>= 4.3.1'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
+gem 'slim-rails', '~> 3.1', '>= 3.1.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # HTML parser
@@ -39,44 +39,44 @@ gem 'oga'
 # gem 'bcrypt', '~> 3.1.7'
 
 # authentication
-gem 'devise'
+gem 'devise', '>= 4.3.0'
 
 # models
 gem 'active_hash'
-gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_model_serializers', '~> 0.10.7'
 gem 'geocoder'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
 # pagination
-gem 'kaminari'
+gem 'kaminari', '>= 1.1.1'
 
 # i18n
-gem 'rails-i18n', '~> 5.0.0'
+gem 'rails-i18n', '~> 5.0.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3.7', '>= 3.7.1'
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '>= 3.1.5', '< 3.2'
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.7'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-puma'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '>= 3.5.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0.1'
 end
 
 group :test do
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '>= 4.8.2'
   gem 'faker'
   gem 'simplecov', require: false
 end
